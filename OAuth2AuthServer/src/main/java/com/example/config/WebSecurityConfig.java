@@ -12,9 +12,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Created by on 28.01.16.
+ * Created by on 2017.01.12
  *
- * @author David Steiman
+ * @author Manki Kim
  */
 @Configuration
 class WebSecurityConfig extends WebSecurityConfigurerAdapter {

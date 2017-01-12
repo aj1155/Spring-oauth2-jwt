@@ -13,9 +13,9 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
 /**
- * Created by on 29.01.16.
+ * Created by on 2017.01.12
  *
- * @author David Steiman
+ * @author Manki Kim
  */
 @Configuration
 @EnableResourceServer

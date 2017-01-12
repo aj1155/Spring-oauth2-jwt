@@ -4,9 +4,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
 /**
- * Created by on 01.02.16.
+ * Created by on 2017.01.12
  *
- * @author David Steiman
+ * @author Manki Kim
  */
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)

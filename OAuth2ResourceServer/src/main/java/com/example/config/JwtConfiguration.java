@@ -14,9 +14,9 @@ import org.springframework.util.FileCopyUtils;
 import java.io.IOException;
 
 /**
- * Created by on 01.02.16.
+ * Created by on 2017.01.12
  *
- * @author David Steiman
+ * @author Manki Kim
  */
 @Configuration
 public class JwtConfiguration {
@@ -32,6 +32,11 @@ public class JwtConfiguration {
         return new JwtTokenStore(jwtAccessTokenConverter);
     }
 
+
+    /*JwtAccessTokenConverter in ResourceServer is like a filter to translate jwt from Oauth2Server
+     * so we need the way how to translate it
+     * you can make .cert file using openssl
+     */
     @Bean
     protected JwtAccessTokenConverter jwtTokenEnhancer() {
         JwtAccessTokenConverter converter =  new JwtAccessTokenConverter();

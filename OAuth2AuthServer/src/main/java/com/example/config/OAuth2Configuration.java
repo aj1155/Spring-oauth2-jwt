@@ -16,9 +16,9 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 
 /**
- * Created by on 28.01.16.
+ * Created by on 2017.01.12
  *
- * @author David Steiman
+ * @author Manki Kim
  */
 @Configuration
 @EnableAuthorizationServer
@@ -43,15 +43,29 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
     @Qualifier("authenticationManagerBean")
     private AuthenticationManager authenticationManager;
 
+
+
     @Bean
     public TokenStore tokenStore() {
         return new JwtTokenStore(jwtTokenEnhancer());
     }
 
+
+    /*JwtAccessTokenConverter in OauthServer is like a filter to make nomal token to jwt
+     * so we need the way how to make it
+     * you can make .jks file using keytool
+     */
     @Bean
     protected JwtAccessTokenConverter jwtTokenEnhancer() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        /* KeyStoreKeyFactory constructor need three arguments first is the Resource about jks so you just write the path
+         * second is the storepass about the .jks that you made before
+         */
         KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("llpt.jks"), "kimjava".toCharArray());
+        /* getKeyPair demands two arguments
+         * first is alias that you made before in keytool
+         * second is keypass it also you mad before in keytool
+         */
         converter.setKeyPair(keyStoreKeyFactory.getKeyPair("lilipt", "zaqwsx".toCharArray()));
         return converter;
     }

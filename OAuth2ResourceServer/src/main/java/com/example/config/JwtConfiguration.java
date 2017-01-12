@@ -35,10 +35,11 @@ public class JwtConfiguration {
     @Bean
     protected JwtAccessTokenConverter jwtTokenEnhancer() {
         JwtAccessTokenConverter converter =  new JwtAccessTokenConverter();
-        Resource resource = new ClassPathResource("public.cert");
+        Resource resource = new ClassPathResource("llpt.cert");
         String publicKey = null;
         try {
             publicKey = new String(FileCopyUtils.copyToByteArray(resource.getInputStream()));
+            System.out.println(publicKey);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

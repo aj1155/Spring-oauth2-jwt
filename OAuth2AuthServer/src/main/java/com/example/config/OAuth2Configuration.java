@@ -28,6 +28,7 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
         clients.inMemory()
                 .withClient("foo")
                 .scopes("FOO")
+                .secret("bar")
                 .autoApprove(true)
                 .authorities("FOO_READ", "FOO_WRITE")
                 .authorizedGrantTypes("implicit","refresh_token", "password", "authorization_code");
@@ -50,8 +51,8 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
     @Bean
     protected JwtAccessTokenConverter jwtTokenEnhancer() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("jwt.jks"), "mySecretKey".toCharArray());
-        converter.setKeyPair(keyStoreKeyFactory.getKeyPair("jwt"));
+        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("llpt.jks"), "kimjava".toCharArray());
+        converter.setKeyPair(keyStoreKeyFactory.getKeyPair("lilipt", "zaqwsx".toCharArray()));
         return converter;
     }
 }

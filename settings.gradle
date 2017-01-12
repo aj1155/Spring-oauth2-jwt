@@ -1,0 +1,4 @@
+rootProject.name = 'spring-oauth2-jwt-settings'
+
+include 'OAuth2AuthServer'
+include 'OAuth2ResourceServer'

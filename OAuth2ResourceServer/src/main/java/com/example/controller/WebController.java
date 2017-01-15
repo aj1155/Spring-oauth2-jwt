@@ -1,5 +1,8 @@
 package com.example.controller;
 
+import com.example.service.JWTAuthenticationService;
+import org.jose4j.jwt.consumer.InvalidJwtException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,13 +21,17 @@ import java.util.UUID;
 @RequestMapping("/foo")
 public class WebController {
 
+    @Autowired
+    private JWTAuthenticationService jwtAuthenticationService;
+
     @RequestMapping(method = RequestMethod.GET)
-    public String readFoo(ServletRequest request) {
+    public String readFoo(ServletRequest request) throws InvalidJwtException {
         HttpServletRequest httpRequest = (HttpServletRequest)request;
         String authToken = httpRequest.getHeader("Authorization");
         System.out.println("토큰:"+authToken);
-        //final Claims claims = Jwts.parser().parseClaimsJwt(authToken).getBody();
-        //System.out.println(claims.toString());
+        //jwtAuthenticationService.getAuthenticationFromBearer(httpRequest);
+        //final Map<String,Object> jwtMap = JwtClaims.parse(authToken).getClaimsMap();
+        //System.out.println(jwtMap.toString());
         return "read foo " + UUID.randomUUID().toString();
     }
 

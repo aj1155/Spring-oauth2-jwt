@@ -36,7 +36,7 @@ public class JwtConfiguration {
     /*JwtAccessTokenConverter in ResourceServer is like a filter to translate jwt from Oauth2Server
      * so we need the way how to translate it
      * you can make .cert file using openssl
-     * sometimes there are some problems to translate JWT token in windows so if it's possible we use another os like rinix , mac
+     * sometimes there are some problems to translate JWT token in windows so if it's possible we use another os like rinux , mac
      */
     @Bean
     protected JwtAccessTokenConverter jwtTokenEnhancer() {

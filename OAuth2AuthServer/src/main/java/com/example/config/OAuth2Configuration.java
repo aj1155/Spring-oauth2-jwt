@@ -27,7 +27,7 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
                 .withClient("foo")
-                .scopes("FOO")
+                .scopes("develop")
                 .secret("bar")
                 .autoApprove(true)
                 .authorities("FOO_READ", "FOO_WRITE")
@@ -55,18 +55,25 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
      * so we need the way how to make it
      * you can make .jks file using keytool
      */
+
+    //Todo Jwts.builder() ...
     @Bean
     protected JwtAccessTokenConverter jwtTokenEnhancer() {
+
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
         /* KeyStoreKeyFactory constructor need three arguments first is the Resource about jks so you just write the path
          * second is the storepass about the .jks that you made before
          */
-        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("llpt.jks"), "kimjava".toCharArray());
+        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("test.jks"), "kimjava".toCharArray());
         /* getKeyPair demands two arguments
          * first is alias that you made before in keytool
          * second is keypass it also you mad before in keytool
          */
-        converter.setKeyPair(keyStoreKeyFactory.getKeyPair("lilipt", "zaqwsx".toCharArray()));
+        converter.setKeyPair(keyStoreKeyFactory.getKeyPair("liliput", "kimjava".toCharArray()));
+        //KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("jwt.jks"), "mySecretKey".toCharArray());
+        //JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        //converter.setKeyPair(keyStoreKeyFactory.getKeyPair("jwt"));
+
         return converter;
     }
 }

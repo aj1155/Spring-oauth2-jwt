@@ -2,6 +2,8 @@ package com.example.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.security.oauth2.provider.OAuth2Request;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.stereotype.Service;
 
@@ -25,10 +27,13 @@ public class JwtFilter {
         String token = validateToken(request);
         if(token!=null){
             OAuth2AccessToken oauthToken = tokenStore.readAccessToken(token);
+            OAuth2Authentication auth = tokenStore.readAuthentication(token);
+            OAuth2Request authRequest = auth.getOAuth2Request();
             Map<String,Object> filterToken = new HashMap<String,Object>();
             filterToken.put("scope",oauthToken.getScope());
             filterToken.put("user_name",oauthToken.getAdditionalInformation().get("user_name"));
             filterToken.put("authorities",oauthToken.getAdditionalInformation().get("authorities"));
+            filterToken.put("client_id",authRequest.getClientId());
             return filterToken;
         }
         return null;

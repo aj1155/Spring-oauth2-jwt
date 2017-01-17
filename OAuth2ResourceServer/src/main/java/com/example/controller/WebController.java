@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.service.JWTAuthenticationService;
+import com.example.service.JwtFilter;
 import org.jose4j.jwt.consumer.InvalidJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -24,14 +26,14 @@ public class WebController {
     @Autowired
     private JWTAuthenticationService jwtAuthenticationService;
 
+    @Autowired
+    private JwtFilter jwtFilter;
+
     @RequestMapping(method = RequestMethod.GET)
     public String readFoo(ServletRequest request) throws InvalidJwtException {
         HttpServletRequest httpRequest = (HttpServletRequest)request;
-        String authToken = httpRequest.getHeader("Authorization");
-        System.out.println("토큰:"+authToken);
-        //jwtAuthenticationService.getAuthenticationFromBearer(httpRequest);
-        //final Map<String,Object> jwtMap = JwtClaims.parse(authToken).getClaimsMap();
-        //System.out.println(jwtMap.toString());
+        Map<String,Object> token = jwtFilter.filterToken(httpRequest);
+        System.out.println(token.toString());
         return "read foo " + UUID.randomUUID().toString();
     }
 

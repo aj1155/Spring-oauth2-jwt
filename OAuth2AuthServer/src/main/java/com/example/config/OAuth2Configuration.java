@@ -77,10 +77,6 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
          * second is keypass it also you mad before in keytool
          */
         converter.setKeyPair(keyStoreKeyFactory.getKeyPair("liliput", "kimjava".toCharArray()));
-        //KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("jwt.jks"), "mySecretKey".toCharArray());
-        //JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        //converter.setKeyPair(keyStoreKeyFactory.getKeyPair("jwt"));
-
         return converter;
     }
 }

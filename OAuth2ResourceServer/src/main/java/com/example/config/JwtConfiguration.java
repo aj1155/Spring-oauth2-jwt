@@ -45,7 +45,6 @@ public class JwtConfiguration {
         String publicKey = null;
         try {
             publicKey = new String(FileCopyUtils.copyToByteArray(resource.getInputStream()));
-            System.out.println(publicKey);
         } catch (IOException e) {
             throw new RuntimeException(e);
 

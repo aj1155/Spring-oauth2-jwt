@@ -40,12 +40,13 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic();
     }
 
+    //Todo auth check in DB
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
                 .withUser("manki")
                 .password("1111")
-                .authorities("FOO_READ")
+                .authorities("FOO_READ","FOO_DEV")
                 .and()
                 .withUser("admin")
                 .password("admin")
